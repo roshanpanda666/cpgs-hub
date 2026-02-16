@@ -23,11 +23,15 @@ export async function POST(req: NextRequest) {
 
         // Check if user has an admin-level role
         const adminRoles = ["admin", "developer", "cr", "hod"];
-        if (!adminRoles.includes(user.role)) {
-            return NextResponse.json({ error: "Unauthorized access" }, { status: 403 });
+        // Ensure role exists and is string
+        const userRole = user.role ? String(user.role) : "";
+
+        if (!adminRoles.includes(userRole)) {
+            return NextResponse.json({ error: `Unauthorized access (Role: ${userRole})` }, { status: 403 });
         }
 
         const match = await bcrypt.compare(password, user.password || "");
+
         if (!match) {
             return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
         }

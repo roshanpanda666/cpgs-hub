@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, ".env.local") });
+require("dotenv").config({ path: path.join(__dirname, "../.env.local") });
 
 // Define User Schema inline to avoid module import issues in standalone script
 const UserSchema = new mongoose.Schema(
@@ -21,13 +21,13 @@ const UserSchema = new mongoose.Schema(
 const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 async function seed() {
-    if (!process.env.MONGODB_URI) {
-        console.error("❌ MONGODB_URI is not defined in .env.local");
+    if (!process.env.CONNECTIONURI) {
+        console.error("❌ CONNECTIONURI is not defined in .env.local");
         process.exit(1);
     }
 
     try {
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.CONNECTIONURI);
         console.log("✅ Connected to MongoDB");
 
         const adminEmail = "admin@cpgs.hub";

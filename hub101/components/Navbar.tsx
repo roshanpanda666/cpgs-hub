@@ -12,7 +12,7 @@ const navLinks = [
   { href: "/exams", label: "Exams", icon: "📝" },
   { href: "/upload", label: "Upload", icon: "☁️" },
   { href: "/add-routine", label: "Add Routine", icon: "➕" },
-  { href: "/admin", label: "Admin", icon: "⚙️" },
+  { href: "/admin/login", label: "Admin", icon: "⚙️" },
   { href: "/about", label: "About", icon: "👨‍💻" },
 ];
 

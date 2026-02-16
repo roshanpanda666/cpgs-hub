@@ -24,6 +24,9 @@ async function dbConnect() {
     if (cached.conn) return cached.conn;
 
     if (!cached.promise) {
+        // Force rewrite of models in dev to ensure schema updates
+
+
         cached.promise = mongoose.connect(CONNECTIONURI, {
             bufferCommands: false,
         });

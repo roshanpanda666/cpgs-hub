@@ -23,7 +23,10 @@ const UserSchema = new Schema<IUser>(
     { timestamps: true }
 );
 
-const User: Model<IUser> =
-    mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+// Force overwrite of model if it exists to ensure new schema fields (like role) are picked up
+if (mongoose.models.User) {
+    delete mongoose.models.User;
+}
+const User: Model<IUser> = mongoose.model<IUser>("User", UserSchema);
 
 export default User;
